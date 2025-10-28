@@ -17,6 +17,7 @@ body {
   padding: 2rem;
   max-width: 330px;
   max-height: 400px;
+  margin: 0 1rem;
 }
 
 .card__star-icon {
