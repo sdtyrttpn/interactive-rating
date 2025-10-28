@@ -1,13 +1,32 @@
-const menuButton = document.querySelector(".menu-btn");
-const menuButtonImg = document.querySelector(".menu-btn img");
-const menuList = document.querySelector("nav ul");
+let content = document.querySelector(".card");
 
-menuButton.addEventListener("click", () => {
-  if (menuButtonImg.src.includes("icon-menu.svg")) {
-    menuList.style.transform = "translateX(0)";
-    menuButtonImg.src = "assets/images/icon-menu-close.svg";
+const ratings = document.querySelectorAll(".card__ratings button");
+
+const submitButton = document.querySelector(".card__submit-button");
+
+let selectedRating = null;
+
+ratings.forEach((rating) => {
+  rating.addEventListener("click", () => {
+    ratings.forEach((rating) => {
+      rating.setAttribute("aria-pressed", "false");
+    });
+    rating.setAttribute("aria-pressed", "true");
+    selectedRating = rating;
+  });
+});
+
+submitButton.addEventListener("click", () => {
+  if (selectedRating == null) {
+    console.log("deger seciniz");
   } else {
-    menuList.style.transform = "translateX(100%)";
-    menuButtonImg.src = "assets/images/icon-menu.svg";
+    content.classList.add("result");
+    content.innerHTML = `<img class="card__result-img" src="images/illustration-thank-you.svg" />
+      <span class="card__result-rating">You selected ${selectedRating.innerHTML} out of 5</span>
+      <h2 class="card__result-title">Thank you!</h2>
+      <p class="card__result-text">
+        We appreciate you taking the time to give a rating. If you ever need more support, don’t
+        hesitate to get in touch!
+      </p>`;
   }
 });
